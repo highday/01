@@ -1,0 +1,33 @@
+{
+  "name": "01-backend",
+  "version": "1.0.0",
+  "description": "yes or no",
+  "main": "src/main.js",
+  "scripts": {
+    "sls.init": "sls dynamodb install",
+    "sls.dynamodb": "sls dynamodb start",
+    "sls.offline": "sls offline --port=5757",
+    "sls.dynamodb.kill": "ps -ef | grep dynamodb | head -n 1 | cut -f 4 -d' ' | xargs kill"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/highday/01.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/highday/01/issues"
+  },
+  "homepage": "https://github.com/highday/01#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dynamoose": "^0.8.7",
+    "express": "^4.16.3",
+    "serverless-http": "^1.6.0"
+  },
+  "devDependencies": {
+    "serverless": "^1.31.0",
+    "serverless-dynamodb-local": "^0.2.33",
+    "serverless-offline": "^3.25.11"
+  }
+}
