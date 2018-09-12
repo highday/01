@@ -11,14 +11,13 @@ module.exports = (env, args) => {
         enabledSourceMap = mode === 'development'
 
   return {
-    mode   : mode,
-    entry  : src + '/index.js',
-    output : {
-      path      : dist,
-      publicPath: '/',
-      filename  : 'bundle.js'
+    mode  : mode,
+    entry : src + '/index.js',
+    output: {
+      path    : dist,
+      filename: 'bundle.js'
     },
-    module : {
+    module: {
       rules: [
         {
           test: /\.vue$/,
