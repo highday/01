@@ -8,7 +8,7 @@ export default class API {
   }
 
   static me() {
-    return this._request('get', '/me')
+    return this._request('get', '/auth/me')
   }
 
   static getUsers() {

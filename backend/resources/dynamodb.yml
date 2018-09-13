@@ -7,7 +7,7 @@ Resources:
       TableName: users
       AttributeDefinitions:
       - AttributeName: id
-        AttributeType: N
+        AttributeType: S
       - AttributeName: uid
         AttributeType: N
       - AttributeName: email

@@ -44,6 +44,7 @@ export default {
         try {
           await dispatch('_getSession')
           const info = await dispatch('getAuthInfo')
+          console.log(info)
           commit('setJwtToken', info.currentSession.accessToken.jwtToken)
           await dispatch('_fetchMe')
           resolve()

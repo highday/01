@@ -1,9 +1,10 @@
 'use strict'
 
-const serverless = require('serverless-http')
-  , bodyParser   = require('body-parser')
-  , express      = require('express')
-  , app          = express()
+const serverless    = require('serverless-http')
+  , bodyParser      = require('body-parser')
+  , express         = require('express')
+  , app             = express()
+  , GetSignedInUser = require('./handlers/GetSignedInUser')
 
 // settings
 app.use(bodyParser.urlencoded({
@@ -12,27 +13,29 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 // middle wares
-/*
 const authMiddleWare = async (req, res, next) => {
 
-  const authorizer = req.context.authorizer
-  const username = authorizer.claims ? authorizer.claims.username : null
+  try {
+    const authorizer = req.context.authorizer
+    const username = authorizer.claims ? authorizer.claims.username : null
 
-  const SignedInUser = await GetSignedInUser(username)
-  if (!SignedInUser) {
+    const SignedInUser = await GetSignedInUser(username)
+    if (!SignedInUser) {
+      return res.status(401).json({message: 'Unauthorized'})
+    }
+
+    req.SignedInUser = SignedInUser
+
+    next()
+  } catch (e) {
     return res.status(401).json({message: 'Unauthorized'})
   }
-
-  req.SignedInUser = SignedInUser
-
-  next()
 }
-*/
 
 // routing
-const test = require('./handlers/test')
+const auth = require('./handlers/auth')
 
-app.get('/articles', test.index)
+app.get('/auth/me', authMiddleWare, auth.me)
 
 // error handling
 app.use(function (err, req, res, next) {
@@ -46,7 +49,6 @@ app.use((req, res) => {
 })
 
 // export
-app.listen(5757)
 module.exports.main = serverless(app, {
   request: (req, event, context) => {
     req.context = event.requestContext;
