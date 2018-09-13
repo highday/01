@@ -14,8 +14,9 @@ module.exports = (env, args) => {
     mode  : mode,
     entry : src + '/index.js',
     output: {
-      path    : dist,
-      filename: 'bundle.js'
+      path      : dist,
+      publicPath: '/',
+      filename  : 'bundle.js'
     },
     module: {
       rules: [
